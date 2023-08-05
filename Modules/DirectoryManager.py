@@ -6,34 +6,54 @@ class DirectoryManager():
 
     def __init__(self) -> None:
 
-        self.output_base_path = os.getenv("DATA_BASE_PATH")
-        self.image_output_dir = {
+        self.logger = logging.getLogger('Main.DirectoryManager')
+        self.__init_directories__()
+
+    def __init_directories__(self):
+
+        self.image_folders = {
             "RED": os.getenv("RED_DIR"),
             "GREEN": os.getenv("GREEN_DIR"),
             "NIR": os.getenv("NIR_DIR"),
             "RED_EDGE": os.getenv("RED_EDGE_DIR")
         }
+        self.__init_input_dir__()
+        self.__init_output_dir__
 
-        self.logger = logging.getLogger('Main.DirectoryManager')
+    def __init_input_dir__(self):
+        self.input_dir = {}
+        self.base_input_dir = os.getenv("ORIGINAL_DATA_DIR")
 
-        self.__init_directories__()
+        for key in self.image_folders:
+            self.input_dir[key] = os.path.join(
+                self.base_input_dir, self.image_folders[key], "Train_Images")
 
-    def __init_directories__(self):
+    def __init_output_dir__(self):
+        self.output_dir = {}
+        self.base_output_dir = os.getenv("OUTPUT_BASE_PATH")
 
-        if (os.path.exists(self.output_base_path) == False):
+        if (os.path.exists(self.base_output_dir) == False):
             self.logger.info("Creating output directory")
-            os.mkdir(self.output_base_path)
+            os.mkdir(self.base_output_dir)
         else:
             self.logger.info("Main output directory exists")
 
-        for key in self.image_output_dir:
+        for key in self.image_folders:
             temp_dir = os.path.join(
-                self.output_base_path, self.image_output_dir[key])
+                self.base_output_dir, self.image_folders[key])
+
+            self.output_dir[key] = temp_dir
 
             if (os.path.exists(temp_dir) == False):
                 self.logger.info(
-                    f"Creating {self.image_output_dir[key]} directory")
+                    f"Creating {self.image_folders[key]} directory")
                 os.mkdir(temp_dir)
             else:
                 self.logger.info(
-                    f"Output directory for {self.image_output_dir[key]} already exists")
+                    f"Output directory for {self.image_folders[key]} already exists")
+
+    def get_output_dirs(self):
+        return self.output_dir
+
+    def get_input_dirs(self):
+        return self.input_dir

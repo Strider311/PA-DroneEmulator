@@ -4,7 +4,7 @@ import logging
 import datetime
 from pyfiglet import Figlet
 from dotenv import load_dotenv
-from Modules.DirectoryManager import DirectoryManager as directory_manager
+
 
 
 def init_logger():
@@ -37,7 +37,7 @@ def main():
     startup_splash()
     init_logger()
 
-    directory_manager()
+    
 
 
 if __name__ == '__main__':
