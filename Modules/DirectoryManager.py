@@ -19,7 +19,7 @@ class DirectoryManager():
         }
 
         self.__init_input_dir__()
-        self.__init_output_dir__()
+        # self.__init_output_dir__()
 
     def __init_input_dir__(self):
         self.input_dir = {}

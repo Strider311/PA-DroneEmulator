@@ -8,7 +8,9 @@ class BaseQueueSender():
         self.rmq_host = rmq_host
         self.name = name
         self.__init_logger__()
-        self.__connect__()
+        connection_result = self.__connect__()
+        if (connection_result == False):
+            raise ConnectionError("Failed to connect to message broker")
 
     def __init_connection__(self) -> None:
         self.connection = pika.BlockingConnection(
