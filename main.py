@@ -4,6 +4,7 @@ import logging
 import datetime
 from pyfiglet import Figlet
 from dotenv import load_dotenv
+from Processors.OutGoingProcessor import OutGoingProcessor
 
 
 
@@ -36,7 +37,8 @@ def main():
     load_dotenv()
     startup_splash()
     init_logger()
-
+    _ = OutGoingProcessor()
+    
     
 
 

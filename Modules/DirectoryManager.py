@@ -17,8 +17,9 @@ class DirectoryManager():
             "NIR": os.getenv("NIR_DIR"),
             "RED_EDGE": os.getenv("RED_EDGE_DIR")
         }
+
         self.__init_input_dir__()
-        self.__init_output_dir__
+        self.__init_output_dir__()
 
     def __init_input_dir__(self):
         self.input_dir = {}
@@ -52,8 +53,9 @@ class DirectoryManager():
                 self.logger.info(
                     f"Output directory for {self.image_folders[key]} already exists")
 
-    def get_output_dirs(self):
+
+    def get_output_dirs(self) -> dict(): 
         return self.output_dir
 
-    def get_input_dirs(self):
+    def get_input_dirs(self) -> dict():
         return self.input_dir
