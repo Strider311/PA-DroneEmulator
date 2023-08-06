@@ -6,7 +6,7 @@ class DirectoryManager():
 
     def __init__(self) -> None:
 
-        self.logger = logging.getLogger('Main.DirectoryManager')
+        self.logger = logging.getLogger(__name__)
         self.__init_directories__()
 
     def __init_directories__(self):
@@ -53,8 +53,7 @@ class DirectoryManager():
                 self.logger.info(
                     f"Output directory for {self.image_folders[key]} already exists")
 
-
-    def get_output_dirs(self) -> dict(): 
+    def get_output_dirs(self) -> dict():
         return self.output_dir
 
     def get_input_dirs(self) -> dict():

@@ -18,7 +18,7 @@ class BaseQueueSender():
 
     def __init_logger__(self):
         logging.getLogger("pika").setLevel(logging.FATAL)
-        self.logger = logging.getLogger(f'Main.{self.name}')
+        self.logger = logging.getLogger(self.name)
         self.logger.setLevel(logging.DEBUG)
 
     def __connect__(self) -> bool:

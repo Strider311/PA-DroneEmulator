@@ -10,6 +10,5 @@ class OutGoingProcessor():
         self.__init_logger__()
 
     def __init_logger__(self):
-
-        self.logger = logging.getLogger(f'Main.MainProcessor')
+        self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.DEBUG)
