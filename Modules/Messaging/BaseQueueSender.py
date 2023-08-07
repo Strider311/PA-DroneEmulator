@@ -8,14 +8,17 @@ class BaseQueueSender():
         self.rmq_host = rmq_host
         self.name = name
         self.__init_logger__()
+
         connection_result = self.__connect__()
         if (connection_result == False):
             raise ConnectionError("Failed to connect to message broker")
 
+        self.logger.info(f"Successfully connected to queue: {self.queue_name}")
+
     def __init_connection__(self) -> None:
-        self.connection = pika.BlockingConnection(
+        connection = pika.BlockingConnection(
             pika.ConnectionParameters(self.rmq_host))
-        self.channel = self.connection.channel()
+        self.channel = connection.channel()
         self.channel.queue_declare(queue=self.queue_name)
 
     def __init_logger__(self):
@@ -40,7 +43,6 @@ class BaseQueueSender():
                     f"Unable to communicate with message broker, retrying... {retry}")
 
     def send(self, message):
-        self.logger.info(f"Publishing new image: {message}")
         self.channel.basic_publish(exchange='',
                                    routing_key=self.queue_name,
                                    body=message)

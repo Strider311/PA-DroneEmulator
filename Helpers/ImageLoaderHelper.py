@@ -3,16 +3,18 @@ import rasterio
 from Enums.ImageTypeEnum import ImageType
 import logging
 from Modules.DirectoryManager import DirectoryManager
+import PIL.Image as Image
 
 
 class ImageLoaderHelper():
 
     def __init__(self):
+        self.dir_manager = DirectoryManager()
         self.__init_directories__()
         logging.getLogger("rasterio").setLevel(logging.WARNING)
 
     def __init_directories__(self):
-        self.directories = DirectoryManager.get_input_dirs()
+        self.directories = self.dir_manager.get_input_dirs()
 
     def load(self, file_name: str, image_type: ImageType):
 
@@ -21,7 +23,8 @@ class ImageLoaderHelper():
             file = os.path.join(
                 base_path, file_name)
             image = rasterio.open(file)
-            return image.read(1).astype('float64')
+            image = image.read(1).astype('float64')
+            return image
         except Exception:
             raise ValueError("Unable to load file")
 

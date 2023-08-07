@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 from Processors.OutGoingProcessor import OutGoingProcessor
 
 
-
 def init_logger():
     FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     formatter = logging.Formatter(FORMAT)
@@ -38,8 +37,6 @@ def main():
     startup_splash()
     init_logger()
     _ = OutGoingProcessor()
-    
-    
 
 
 if __name__ == '__main__':
