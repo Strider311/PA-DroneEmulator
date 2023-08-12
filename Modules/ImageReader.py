@@ -4,6 +4,7 @@ import logging
 from Helpers.ImageLoaderHelper import ImageLoaderHelper
 from Enums.ImageTypeEnum import ImageType
 from dto.NewImageDTO import NewImageDTO
+import uuid
 
 
 class ImageReader():
@@ -30,15 +31,8 @@ class ImageReader():
 
         for image in self.images:
             image_dto = NewImageDTO(fileName=image,
-                                    green_image=self.image_loader.load(
-                                        image, ImageType.green),
-                                    red_image=self.image_loader.load(
-                                        image, ImageType.red),
-                                    nir_image=self.image_loader.load(
-                                        image, ImageType.nir),
-                                    red_e_image=self.image_loader.load(
-                                        image, ImageType.red_edge),
                                     dt_processed=datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S"),
+                                    id=str(uuid.uuid4())
                                     )
 
             self.callback(image_dto)
