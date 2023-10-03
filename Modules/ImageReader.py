@@ -1,7 +1,6 @@
 import datetime
 import os
 import logging
-from Helpers.ImageLoaderHelper import ImageLoaderHelper
 from Enums.ImageTypeEnum import ImageType
 from dto.NewImageDTO import NewImageDTO
 import uuid
