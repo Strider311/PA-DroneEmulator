@@ -2,6 +2,7 @@ import datetime
 import os
 import logging
 from Enums.ImageTypeEnum import ImageType
+from Modules.DirectoryManager import DirectoryManager
 from dto.NewImageDTO import NewImageDTO
 import uuid
 
@@ -10,7 +11,7 @@ class ImageReader():
 
     def __init__(self, callback) -> None:
         self.__init_logger__()
-        self.image_loader = ImageLoaderHelper()
+        self.dir_manager = DirectoryManager()
         self.__read_directory__()
         self.callback = callback
 
@@ -18,12 +19,8 @@ class ImageReader():
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.DEBUG)
 
-    def __load_image__(self, fileName, image_type):
-        image = self.image_loader.load(fileName, image_type)
-        return image
-
     def __read_directory__(self):
-        self.input_paths = self.image_loader.dir_manager.get_input_dirs()
+        self.input_paths = self.dir_manager.get_input_dirs()
         self.images = os.listdir(self.input_paths["RED"])
 
     def start(self):

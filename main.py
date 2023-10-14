@@ -49,6 +49,10 @@ if __name__ == '__main__':
         except SystemExit:
             os._exit(0)
     except ConnectionError as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         logging.error(f"Connection issue: {e}")
     except Exception as e:
-        logging.error(f"Unhandled exception: {e}")
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        logging.error(f"Unhandled Exception: {e}")

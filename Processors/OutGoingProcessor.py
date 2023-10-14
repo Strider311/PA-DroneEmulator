@@ -9,7 +9,6 @@ from Helpers.NumpyEncoder import NumpyEncoder
 class OutGoingProcessor():
 
     def __init__(self) -> None:
-        self.image_reader = None
         self.__init_logger__()
         self.new_image_publisher = NewImageSender()
         self.start()
@@ -24,6 +23,6 @@ class OutGoingProcessor():
         json_dto: str = json.dumps(json_dto, cls=NumpyEncoder)
         self.new_image_publisher.publish_new_image(json_dto)
 
-    def start(self): # Endpoint: "Who was in paris?"
+    def start(self):
         self.image_reader = ImageReader(self.__callback__)
         self.image_reader.start()
