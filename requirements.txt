@@ -2,3 +2,4 @@ python-dotenv
 pika
 pyfiglet
 numpy
+requests
